@@ -1,35 +1,46 @@
 $(document).ready(function () {
-    generateBoard(42)
+    let count = 0
+    $(".circle").each(function () {
+        $(this).attr("id", count)
+        $(this).attr("data-player", 0)
+        count++
+        $(this).on("click", addColor)
+    })
 })
 
 //creation of game board
 
-const generateBoard = (number) => {
-    for (i = 1; i <= number; i++) {
-        const $circle = $("<div>").addClass("circle")
-        $(".playingBoard").append($circle)
-        $circle.attr("id", i)
-        $circle.attr("data-player", "0")
-            $circle.on("click", addColor)
-    }
-}
+// const generateBoard = (number) => {
+//     for (i = 1; i <= number; i++) {
+//         const $circle = $("<div>").addClass("circle")
+//         $(".playingBoard").append($circle)
+//         $circle.attr("id", i)
+//         $circle.attr("data-player", "0")
+//             $circle.on("click", addColor)
+//             }
+//             if(checkWin($circle) != "game continues"){
+//                 alert(checkWin())
+//     }
+// }
 
 //add color
 let currentTurn = 1
+let player = 1
+let colors = {}
+colors[-1] = "yellow"
+colors[1] = "red"
+
 const addColor = (event) => {
-    if(isValid($(event.currentTarget).attr("id"))) {
-        if (currentTurn % 2 === 0) {
-            $(event.currentTarget).css("background-color", "red")
-            $(event.currentTarget).attr("data-player", "2")
-            currentTurn += 1
-        } else {
-            $(event.currentTarget).css("background-color", "yellow")
-            $(event.currentTarget).attr("data-player", "1")
-            currentTurn += 1
+    if (isValid($(event.currentTarget).attr("id"))) {
+        $(event.currentTarget).css("background-color", colors[player])
+        $(event.currentTarget).attr("data-player", player)
+        if (checkWin(player)) {
+            alert(colors[player] + " has won!")
         }
+        player *= -1
     }
-    
 }
+
 
 //isValid check
 const isValid = (n) => {
@@ -42,5 +53,70 @@ const isValid = (n) => {
             return true
         }
     }
+    return false
+}
+
+//checkWin condition
+const checkWin = (p) => {
+    //check rows
+    let chain = 0
+    for (i = 0; i < 42; i += 7) { // go through each row
+        for (j = 0; j < 7; j++) { // each cell within each row
+            let cell = $("#" + (i + j)) //sets the current cell
+            if (cell.attr("data-player") == p) {
+                chain++
+            } else {
+                chain = 0
+            }
+            if (chain >= 4) {
+                return true
+            }
+        }
+        chain = 0
+    }
+    //check columns
+    chain = 0
+    for (i = 0; i < 7; i++) {
+        for (j = 0; j < 42; j += 7) {
+            let cell = $("#" + (i + j))
+            if (cell.attr("data-player") == p) {
+                chain++
+            } else {
+                chain = 0
+            }
+            if (chain >= 4) {
+                return true
+            }
+        }
+        chain = 0
+    }
+
+    //check diagonals
+    let topLeft = 0
+    let topRight = topLeft + 3 //creation of 4x4 square
+
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 4; j++) {
+            if ($("#" + topLeft).attr("data-player") == p
+                && $("#" + (topLeft + 8)).attr("data-player") == p
+                && $("#" + (topLeft + 16)).attr("data-player") == p
+                && $("#" + (topLeft + 24)).attr("data-player") == p) {
+                return true
+            }
+
+            if ($("#" + topRight).attr("data-player") == p
+                && $("#" + (topRight + 6)).attr("data-player") == p
+                && $("#" + (topRight + 12)).attr("data-player") == p
+                && $("#" + (topRight + 18)).attr("data-player") == p) {
+                return true
+            }
+            topLeft++
+            topRight = topLeft + 3
+        }
+        topLeft = i * 7 + 7
+        topRight = topLeft + 3
+
+    }
+
     return false
 }
