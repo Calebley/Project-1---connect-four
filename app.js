@@ -26,6 +26,7 @@ $(document).ready(function () {
 //add color
 let currentTurn = 1
 let player = 1
+let winner = 0
 let colors = {}
 colors[-1] = "yellow"
 colors[1] = "red"
@@ -36,6 +37,7 @@ const addColor = (event) => {
         $(event.currentTarget).attr("data-player", player)
         if (checkWin(player)) {
             alert(colors[player] + " has won!")
+            player += 1
         }
         player *= -1
     }
