@@ -1,10 +1,16 @@
 $(document).ready(function () {
-    let count = 0
-    $(".circle").each(function () {
-        $(this).attr("id", count)
-        $(this).attr("data-player", 0)
-        count++
-        $(this).on("click", addColor)
+    $("#start").on("click", () => {
+        $("#start").remove()
+        let count = 0
+        $(".circle").each(function () {
+            $(this).attr("id", count)
+            $(this).attr("data-player", 0)
+            count++
+            $(this).on("click", addColor)
+        })
+    })
+    $("#restart").on("click", () => {
+        clearBoard()
     })
 })
 
@@ -22,6 +28,13 @@ $(document).ready(function () {
 //                 alert(checkWin())
 //     }
 // }
+
+const clearBoard = () => {
+    $(".circle").each(function() {
+        $(this).attr("data-player", 0)
+        $(this).css("background-color", "white")
+    })
+}
 
 //add color
 let currentTurn = 1
