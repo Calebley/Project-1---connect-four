@@ -110,8 +110,8 @@ const checkWin = (p) => {
     let topLeft = 0
     let topRight = topLeft + 3 //creation of 4x4 square
 
-    for (i = 0; i < 3; i++) {
-        for (j = 0; j < 4; j++) {
+    for (i = 0; i < 3; i++) { //move down 3 times
+        for (j = 0; j < 4; j++) { //move right 4 times
             if ($("#" + topLeft).attr("data-player") == p
                 && $("#" + (topLeft + 8)).attr("data-player") == p
                 && $("#" + (topLeft + 16)).attr("data-player") == p
@@ -125,10 +125,10 @@ const checkWin = (p) => {
                 && $("#" + (topRight + 18)).attr("data-player") == p) {
                 return true
             }
-            topLeft++
+            topLeft++ //move across the columns
             topRight = topLeft + 3
         }
-        topLeft = i * 7 + 7
+        topLeft = i * 7 + 7 //move down the rows
         topRight = topLeft + 3
 
     }
