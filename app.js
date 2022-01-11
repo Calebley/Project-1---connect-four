@@ -83,7 +83,7 @@ const checkWin = (p) => {
             } else {
                 chain = 0
             }
-            if (chain >= 4) {
+            if (chain >= 5) {
                 return true
             }
         }
@@ -99,7 +99,7 @@ const checkWin = (p) => {
             } else {
                 chain = 0
             }
-            if (chain >= 4) {
+            if (chain >= 5) {
                 return true
             }
         }
@@ -115,14 +115,16 @@ const checkWin = (p) => {
             if ($("#" + topLeft).attr("data-player") == p
                 && $("#" + (topLeft + 8)).attr("data-player") == p
                 && $("#" + (topLeft + 16)).attr("data-player") == p
-                && $("#" + (topLeft + 24)).attr("data-player") == p) {
+                && $("#" + (topLeft + 24)).attr("data-player") == p
+                && $("#" + (topLeft + 32)).attr("data-player") == p) {
                 return true
             }
 
             if ($("#" + topRight).attr("data-player") == p
                 && $("#" + (topRight + 6)).attr("data-player") == p
                 && $("#" + (topRight + 12)).attr("data-player") == p
-                && $("#" + (topRight + 18)).attr("data-player") == p) {
+                && $("#" + (topRight + 18)).attr("data-player") == p
+                && $("#" + (topRight + 24)).attr("data-player") == p) {
                 return true
             }
             topLeft++ //move across the columns
