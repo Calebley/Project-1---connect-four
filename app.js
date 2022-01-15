@@ -60,11 +60,11 @@ const addColor = (event) => {
 //isValid check
 const isValid = (n) => {
     let id = parseInt(n)
-    if ($("#" + id).attr("data-player") === "0") {
-        if (id >= 35) {
+    if ($("#" + id).attr("data-player") === "0") { 
+        if (id >= 35) { //isValid does not apply for last row
             return true
         }
-        if ($("#" + (id + 7)).attr("data-player") !== "0") {
+        if ($("#" + (id + 7)).attr("data-player") !== "0") { //ensure that the circle below is already colored
             return true
         }
     }
