@@ -25,31 +25,8 @@ $(document).ready(function () {
 
     $("#restart").on("click", () => {
         clearBoard()
-        // createButtons()
     })
 })
-//creation of game board
-
-// const generateBoard = (number) => {
-//     for (i = 1; i <= number; i++) {
-//         const $circle = $("<div>").addClass("circle")
-//         $(".playingBoard").append($circle)
-//         $circle.attr("id", i)
-//         $circle.attr("data-player", "0")
-//             $circle.on("click", addColor)
-//             }
-//             if(checkWin($circle) != "game continues"){
-//                 alert(checkWin())
-//     }
-// }
-
-// const createButtons = () => {
-//     let $player = $("<button>").attr("id","player")
-//     let $computer = $("<button>").attr("id","computer")
-//     $("#buttons").append($player.text("vs player"))
-//     $("#buttons").append($computer.text("vs computer"))
-//     $("body").append($("#buttons"))
-// }
 
 const clearBoard = () => {
     $(".circle").each(function () {
