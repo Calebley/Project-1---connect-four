@@ -33,9 +33,6 @@ const clearBoard = () => {
         $(this).attr("data-player", 0)
         $(this).css("background-color", "white")
     })
-    if (computer == -1) {
-        computer
-    }
 }
 
 //add color for vs player
@@ -79,7 +76,6 @@ const computerPlay = () => {
         for (i = 0; i < 42; i++) {
             let $selectedCircle = $("#" + i)
             if (isValid(($selectedCircle).attr("id"))) {
-
                 $selectedCircle.css("background-color", colors[computer])
                 $selectedCircle.attr("data-player", computer)
                 if (checkWin(computer)) {
@@ -87,11 +83,9 @@ const computerPlay = () => {
                     computer += 1
                     player += 1
                 }
-
                 break;
             }
         }
-
     } else if (computer == 1) {
         playerPlay()
     }
