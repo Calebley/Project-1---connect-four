@@ -19,14 +19,14 @@ $(document).ready(function () {
             $(this).attr("id", count)
             $(this).attr("data-player", 0)
             count++
-            $(this).on("click", computerPlay)
+            $(this).on("click", playerPlay)
         })
     })
 
-        $("#restart").on("click", () => {
-            clearBoard()
-            // createButtons()
-        })
+    $("#restart").on("click", () => {
+        clearBoard()
+        // createButtons()
+    })
 })
 //creation of game board
 
@@ -56,14 +56,17 @@ const clearBoard = () => {
         $(this).attr("data-player", 0)
         $(this).css("background-color", "white")
     })
+    if (computer == -1) {
+        computer
+    }
 }
 
 //add color for vs player
 let currentTurn = 1
 let player = 1
 let colors = {}
-colors[-1] = "yellow"
-colors[1] = "red"
+colors[-1] = "yellow" //computer is yellow
+colors[1] = "red" //player is red
 
 const addColor = (event) => {
     if (isValid($(event.currentTarget).attr("id"))) {
@@ -81,10 +84,43 @@ const addColor = (event) => {
 
 let computer = -1
 
+const playerPlay = (event) => {
+    if (isValid($(event.currentTarget).attr("id"))) {
+        $(event.currentTarget).css("background-color", colors[player])
+        $(event.currentTarget).attr("data-player", player)
+        if (checkWin(player)) {
+            alert(colors[player] + " has won!")
+        }
+    }
+    computer = -1
+    console.log(`computer: ${computer}`)
+    computerPlay()
+}
 
 const computerPlay = () => {
-    $("#" + Math.floor(Math.random() * 43)).css("background-color", colors[computer])
+    if (computer == -1) {
+        for (i = 0; i < 42; i++) {
+            let $selectedCircle = $("#" + i)
+            let $besideCircle = $("#" + (i - 1))
+            if (isValid(($selectedCircle).attr("id"))) {
+
+                $selectedCircle.css("background-color", colors[computer])
+                $selectedCircle.attr("data-player", computer)
+                if (checkWin(computer)) {
+                    alert(colors[computer] + " has won!")
+                }
+
+                break;
+            }
+        }
+
+    } else if (computer == 1) {
+        playerPlay()
+    }
 }
+
+//check near win
+
 
 
 //isValid check
@@ -113,7 +149,7 @@ const checkWin = (p) => {
             } else {
                 chain = 0
             }
-            if (chain >= 5) {
+            if (chain >= 4) {
                 return true
             }
         }
@@ -129,7 +165,7 @@ const checkWin = (p) => {
             } else {
                 chain = 0
             }
-            if (chain >= 5) {
+            if (chain >= 4) {
                 return true
             }
         }
@@ -145,16 +181,14 @@ const checkWin = (p) => {
             if ($("#" + topLeft).attr("data-player") == p
                 && $("#" + (topLeft + 8)).attr("data-player") == p
                 && $("#" + (topLeft + 16)).attr("data-player") == p
-                && $("#" + (topLeft + 24)).attr("data-player") == p
-                && $("#" + (topLeft + 32)).attr("data-player") == p) {
+                && $("#" + (topLeft + 24)).attr("data-player") == p) {
                 return true
             }
 
             if ($("#" + topRight).attr("data-player") == p
                 && $("#" + (topRight + 6)).attr("data-player") == p
                 && $("#" + (topRight + 12)).attr("data-player") == p
-                && $("#" + (topRight + 18)).attr("data-player") == p
-                && $("#" + (topRight + 24)).attr("data-player") == p) {
+                && $("#" + (topRight + 18)).attr("data-player") == p) {
                 return true
             }
             topLeft++ //move across the columns
