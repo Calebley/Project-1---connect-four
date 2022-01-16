@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    $("#start").on("click", () => {
-        $("#start").remove()
+    $("#player").on("click", () => {
+        $("#player").remove()
         let count = 0
         $(".circle").each(function () {
             $(this).attr("id", count)
