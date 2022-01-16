@@ -1,6 +1,7 @@
 $(document).ready(function () {
     $("#player").on("click", () => {
         $("#player").remove()
+        $("#computer").remove()
         let count = 0
         $(".circle").each(function () {
             $(this).attr("id", count)
@@ -9,11 +10,24 @@ $(document).ready(function () {
             $(this).on("click", addColor)
         })
     })
-    $("#restart").on("click", () => {
-        clearBoard()
-    })
-})
 
+    $("#computer").on("click", () => {
+        $("#player").remove()
+        $("#computer").remove()
+        let count = 0
+        $(".circle").each(function () {
+            $(this).attr("id", count)
+            $(this).attr("data-player", 0)
+            count++
+            $(this).on("click", computerPlay)
+        })
+    })
+
+        $("#restart").on("click", () => {
+            clearBoard()
+            // createButtons()
+        })
+})
 //creation of game board
 
 // const generateBoard = (number) => {
@@ -29,17 +43,24 @@ $(document).ready(function () {
 //     }
 // }
 
+// const createButtons = () => {
+//     let $player = $("<button>").attr("id","player")
+//     let $computer = $("<button>").attr("id","computer")
+//     $("#buttons").append($player.text("vs player"))
+//     $("#buttons").append($computer.text("vs computer"))
+//     $("body").append($("#buttons"))
+// }
+
 const clearBoard = () => {
-    $(".circle").each(function() {
+    $(".circle").each(function () {
         $(this).attr("data-player", 0)
         $(this).css("background-color", "white")
     })
 }
 
-//add color
+//add color for vs player
 let currentTurn = 1
 let player = 1
-let winner = 0
 let colors = {}
 colors[-1] = "yellow"
 colors[1] = "red"
@@ -56,11 +77,20 @@ const addColor = (event) => {
     }
 }
 
+//add color for vs computer
+
+let computer = -1
+
+
+const computerPlay = () => {
+    $("#" + Math.floor(Math.random() * 43)).css("background-color", colors[computer])
+}
+
 
 //isValid check
 const isValid = (n) => {
     let id = parseInt(n)
-    if ($("#" + id).attr("data-player") === "0") { 
+    if ($("#" + id).attr("data-player") === "0") {
         if (id >= 35) { //isValid does not apply for last row
             return true
         }
