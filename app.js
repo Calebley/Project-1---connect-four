@@ -90,10 +90,10 @@ const playerPlay = (event) => {
         $(event.currentTarget).attr("data-player", player)
         if (checkWin(player)) {
             alert(colors[player] + " has won!")
+            player += 1
+            computer += 1
         }
     }
-    computer = -1
-    console.log(`computer: ${computer}`)
     computerPlay()
 }
 
@@ -101,13 +101,14 @@ const computerPlay = () => {
     if (computer == -1) {
         for (i = 0; i < 42; i++) {
             let $selectedCircle = $("#" + i)
-            let $besideCircle = $("#" + (i - 1))
             if (isValid(($selectedCircle).attr("id"))) {
 
                 $selectedCircle.css("background-color", colors[computer])
                 $selectedCircle.attr("data-player", computer)
                 if (checkWin(computer)) {
                     alert(colors[computer] + " has won!")
+                    computer += 1
+                    player += 1
                 }
 
                 break;
@@ -118,10 +119,6 @@ const computerPlay = () => {
         playerPlay()
     }
 }
-
-//check near win
-
-
 
 //isValid check
 const isValid = (n) => {
