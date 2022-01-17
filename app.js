@@ -89,6 +89,7 @@ const computerPlay = () => {
             }
         }
     }
+}
 
 
     // const computerPlay = () => {
