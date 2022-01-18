@@ -42,7 +42,6 @@ let player = 1
 let colors = {}
 colors[-1] = "yellow" //computer is yellow
 colors[1] = "red" //player is red
-let $circle = $(".moving")
 
 
 const addColor = (event) => {
@@ -93,7 +92,6 @@ const computerPlay = () => {
         }
     }
 }
-
 
     // const computerPlay = () => {
     //     if (computer == -1) {
@@ -153,20 +151,18 @@ const computerPlay = () => {
     //     return false
     // }
 
-    const closeWin = (n) => {
-        let $cellLeft = $("#" + (n - 1))
-        let $cellRight = $("#" + (n + 1))
-        let $cellTop = $("#" + (n + 7))
-        let $cellBottom = $("#" + (n - 7))
-        if ($cellLeft.attr("data-player") == 1 || $cellRight.attr("data-player") == 1) {
-            return true
-        }
-        if ($cellTop.attr("data-player") == 1 || $cellBottom.attr("data-player") == 1) {
-            return true
-        }
-    }
-
-
+    // const closeWin = (n) => {
+    //     let $cellLeft = $("#" + (n - 1))
+    //     let $cellRight = $("#" + (n + 1))
+    //     let $cellTop = $("#" + (n + 7))
+    //     let $cellBottom = $("#" + (n - 7))
+    //     if ($cellLeft.attr("data-player") == 1 || $cellRight.attr("data-player") == 1) {
+    //         return true
+    //     }
+    //     if ($cellTop.attr("data-player") == 1 || $cellBottom.attr("data-player") == 1) {
+    //         return true
+    //     }
+    // }
 
     //checkWin condition
     const checkWin = (p) => {
@@ -227,8 +223,6 @@ const computerPlay = () => {
             }
             topLeft = i * 7 + 7 //move down the rows
             topRight = topLeft + 3
-
         }
-
         return false
     }
