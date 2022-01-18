@@ -2,6 +2,9 @@ $(document).ready(function () {
     $("#player").on("click", () => {
         $("#player").hide()
         $("#computer").hide()
+        $(".message").hide()
+        $(".playingBoard").css("margin-left", 500)
+        $("#restart").css("margin-left", 850)
         let count = 0
         $(".circle").each(function () {
             $(this).attr("id", count)
@@ -14,6 +17,9 @@ $(document).ready(function () {
     $("#computer").on("click", () => {
         $("#player").hide()
         $("#computer").hide()
+        $(".message").hide()
+        $(".playingBoard").css("margin-left", 500)
+        $("#restart").css("margin-left", 850)
         let count = 0
         $(".circle").each(function () {
             $(this).attr("id", count)
@@ -92,6 +98,7 @@ const computerPlay = () => {
         }
     }
 }
+
 
     // const computerPlay = () => {
     //     if (computer == -1) {
