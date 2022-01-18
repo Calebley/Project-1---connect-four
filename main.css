@@ -7,7 +7,7 @@
     width: 800px;
     background-color: black;
     position: center;
-    margin-left: 500px;
+    margin-left: 50px;
     margin-top: 50px;
     justify-content: center;
 }
@@ -36,7 +36,7 @@
   }
   
   #player {
-    margin-left: 770px;  
+    margin-left: 320px;  
     margin-top: 50px;
       background-color: lightgreen;
       font-family: sans-serif;
@@ -59,7 +59,7 @@
 }
 
   #restart {
-    margin-left: 840px;
+    margin-left: 400px;
     margin-top: 50px;
     background-color: red;
     font-family: sans-serif;
@@ -69,4 +69,12 @@
     text-align: center;
     box-sizing: border-box;
     padding: 15px 25px;
+}
+
+.message {
+    height: 0px;
+    justify-content: center;
+    background-color: white;
+    margin-left: 900px;
+    font-size: 0.5cm;
 }

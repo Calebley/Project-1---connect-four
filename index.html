@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
@@ -7,15 +8,23 @@
     <link rel="stylesheet" href="main.css">
     <title>Connect Four</title>
 </head>
+
 <body>
+    <div class="buttons">
+        <button type="vs player" name="button" id="player">vs player</button>
+        <button type="vs computer" name="button" id="computer">vs computer</button>
+    </div>
 
-    <div class="message"></div>
+    <div class="message">
+        <div>Instructions</div>
+            <ul>
+                <li>Choose either to play against another player or against the computer</li>
+                <li>Your colour will be red</li>
+                <li>Hover your cursor over the row you wish to drop your piece</li>
+                <li>Win when you have 4 pieces connected</li>
+            </ul>
+    </div>
 
-<div class="buttons">
-    <button type="vs player" name="button" id="player">vs player</button>
-    <button type="vs computer" name="button" id="computer">vs computer</button>
-</div>
-    
     <div class="playingBoard">
         <div class="circle"></div>
         <div class="circle"></div>
@@ -69,4 +78,5 @@
     <button id="restart">RESTART</button>
 
 </body>
+
 </html>
