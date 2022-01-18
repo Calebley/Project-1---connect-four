@@ -9,7 +9,7 @@ Each circle is uniquely defined with ID
 This ensures that each circle can be configured to allow the isValid function/ checkWin function to loop through successfully
 
 Unsolved problems:
-To further improve the logic of computer moves, current moves are 1 dimensional and does not block player
+To further improve the logic of computer moves, current moves are random and do not block player from winning
 
 link: https://calebley.github.io/Project-1---connect-four/
 
