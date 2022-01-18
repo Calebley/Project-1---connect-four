@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $("#player").on("click", () => {
-        $("#player").remove()
-        $("#computer").remove()
+        $("#player").hide()
+        $("#computer").hide()
         let count = 0
         $(".circle").each(function () {
             $(this).attr("id", count)
@@ -12,8 +12,8 @@ $(document).ready(function () {
     })
 
     $("#computer").on("click", () => {
-        $("#player").remove()
-        $("#computer").remove()
+        $("#player").hide()
+        $("#computer").hide()
         let count = 0
         $(".circle").each(function () {
             $(this).attr("id", count)
@@ -24,16 +24,17 @@ $(document).ready(function () {
     })
 
     $("#restart").on("click", () => {
-        clearBoard()
+        location.reload()
+        return false
     })
 })
 
-const clearBoard = () => {
-    $(".circle").each(function () {
-        $(this).attr("data-player", 0)
-        $(this).css("background-color", "white")
-    })
-}
+// const clearBoard = () => {
+//     $(".circle").each(function () {
+//         $(this).attr("data-player", 0)
+//         $(this).css("background-color", "white")
+//     })
+// }
 
 //add color for vs player
 let currentTurn = 1
@@ -41,6 +42,8 @@ let player = 1
 let colors = {}
 colors[-1] = "yellow" //computer is yellow
 colors[1] = "red" //player is red
+let $circle = $(".moving")
+
 
 const addColor = (event) => {
     if (isValid($(event.currentTarget).attr("id"))) {
@@ -150,13 +153,18 @@ const computerPlay = () => {
     //     return false
     // }
 
-    // const closeWin = (n) => {
-    //     let $cellLeft = $("#" + (n - 1))
-    //     let $cellRight = $("#" + (n + 1))
-    //     if ($cellLeft.attr("data-player") == 1 && $cellRight.attr("data-player") == 1) {
-    //         return true
-    //     }
-    // }
+    const closeWin = (n) => {
+        let $cellLeft = $("#" + (n - 1))
+        let $cellRight = $("#" + (n + 1))
+        let $cellTop = $("#" + (n + 7))
+        let $cellBottom = $("#" + (n - 7))
+        if ($cellLeft.attr("data-player") == 1 || $cellRight.attr("data-player") == 1) {
+            return true
+        }
+        if ($cellTop.attr("data-player") == 1 || $cellBottom.attr("data-player") == 1) {
+            return true
+        }
+    }
 
 
 
