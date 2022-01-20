@@ -35,13 +35,6 @@ $(document).ready(function () {
     })
 })
 
-// const clearBoard = () => {
-//     $(".circle").each(function () {
-//         $(this).attr("data-player", 0)
-//         $(this).css("background-color", "white")
-//     })
-// }
-
 //add color for vs player
 let currentTurn = 1
 let player = 1
@@ -99,137 +92,79 @@ const computerPlay = () => {
     }
 }
 
+//isValid check
+const isValid = (n) => {
+    let id = parseInt(n)
+    if ($("#" + id).attr("data-player") === "0") {
+        if (id >= 35) { //isValid does not apply for last row
+            return true
+        }
+        if ($("#" + (id + 7)).attr("data-player") !== "0") { //ensure that the circle below is already colored
+            return true
+        }
+    }
+    return false
+}
 
-    // const computerPlay = () => {
-    //     if (computer == -1) {
-    //         for (i = 0; i < 42; i++) {
-    //             let $selectedCircle = $("#" + i)
-    //             if (isValid(($selectedCircle).attr("id"))) {
-    //                 if (closeWin(($selectedCircle).attr("id"))) {
-    //                     $selectedCircle.css("background-color", colors[computer])
-    //                     $selectedCircle.attr("data-player", computer)
-    //                     if (checkWin(computer)) {
-    //                         alert(colors[computer] + " has won!")
-    //                         computer += 1
-    //                         player += 1
-    //                     }
-    //                     break;
-    //                 }
-    //                 else {
-    //                     $selectedCircle.css("background-color", colors[computer])
-    //                     $selectedCircle.attr("data-player", computer)
-    //                     if (checkWin(computer)) {
-    //                         alert(colors[computer] + " has won!")
-    //                         computer += 1
-    //                         player += 1
-    //                     }
-    //                     break;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-
-    //isValid check
-    const isValid = (n) => {
-        let id = parseInt(n)
-        if ($("#" + id).attr("data-player") === "0") {
-            if (id >= 35) { //isValid does not apply for last row
-                return true
+//checkWin condition
+const checkWin = (p) => {
+    //check rows
+    let chain = 0
+    for (i = 0; i < 42; i += 7) { // go through each row
+        for (j = 0; j < 7; j++) { // each cell within each row
+            let cell = $("#" + (i + j)) //sets the current cell
+            if (cell.attr("data-player") == p) {
+                chain++
+            } else {
+                chain = 0
             }
-            if ($("#" + (id + 7)).attr("data-player") !== "0") { //ensure that the circle below is already colored
+            if (chain >= 4) {
                 return true
             }
         }
-        return false
+        chain = 0
+    }
+    //check columns
+    chain = 0
+    for (i = 0; i < 7; i++) {
+        for (j = 0; j < 42; j += 7) {
+            let cell = $("#" + (i + j))
+            if (cell.attr("data-player") == p) {
+                chain++
+            } else {
+                chain = 0
+            }
+            if (chain >= 4) {
+                return true
+            }
+        }
+        chain = 0
     }
 
-    //nearWin check
+    //check diagonals
+    let topLeft = 0
+    let topRight = topLeft + 3 //creation of 4x4 square
 
-    // const nearWin = (n) => {
-    //     let id = parseInt(n)
-    //     if ($("#" + (id - 1)).attr("data-player") == 1) {
-    //         return true
-    //     } else if ($("#" + (id + 1)).attr("data-player") == 1) {
-    //         return true
-    //     } else if ($("#" + (id - 7)).attr("data-player") == 1) {
-    //         return true
-    //     }
-    //     return false
-    // }
-
-    // const closeWin = (n) => {
-    //     let $cellLeft = $("#" + (n - 1))
-    //     let $cellRight = $("#" + (n + 1))
-    //     let $cellTop = $("#" + (n + 7))
-    //     let $cellBottom = $("#" + (n - 7))
-    //     if ($cellLeft.attr("data-player") == 1 || $cellRight.attr("data-player") == 1) {
-    //         return true
-    //     }
-    //     if ($cellTop.attr("data-player") == 1 || $cellBottom.attr("data-player") == 1) {
-    //         return true
-    //     }
-    // }
-
-    //checkWin condition
-    const checkWin = (p) => {
-        //check rows
-        let chain = 0
-        for (i = 0; i < 42; i += 7) { // go through each row
-            for (j = 0; j < 7; j++) { // each cell within each row
-                let cell = $("#" + (i + j)) //sets the current cell
-                if (cell.attr("data-player") == p) {
-                    chain++
-                } else {
-                    chain = 0
-                }
-                if (chain >= 4) {
-                    return true
-                }
+    for (i = 0; i < 3; i++) { //move down 3 times
+        for (j = 0; j < 4; j++) { //move right 4 times
+            if ($("#" + topLeft).attr("data-player") == p
+                && $("#" + (topLeft + 8)).attr("data-player") == p
+                && $("#" + (topLeft + 16)).attr("data-player") == p
+                && $("#" + (topLeft + 24)).attr("data-player") == p) {
+                return true
             }
-            chain = 0
-        }
-        //check columns
-        chain = 0
-        for (i = 0; i < 7; i++) {
-            for (j = 0; j < 42; j += 7) {
-                let cell = $("#" + (i + j))
-                if (cell.attr("data-player") == p) {
-                    chain++
-                } else {
-                    chain = 0
-                }
-                if (chain >= 4) {
-                    return true
-                }
+
+            if ($("#" + topRight).attr("data-player") == p
+                && $("#" + (topRight + 6)).attr("data-player") == p
+                && $("#" + (topRight + 12)).attr("data-player") == p
+                && $("#" + (topRight + 18)).attr("data-player") == p) {
+                return true
             }
-            chain = 0
-        }
-
-        //check diagonals
-        let topLeft = 0
-        let topRight = topLeft + 3 //creation of 4x4 square
-
-        for (i = 0; i < 3; i++) { //move down 3 times
-            for (j = 0; j < 4; j++) { //move right 4 times
-                if ($("#" + topLeft).attr("data-player") == p
-                    && $("#" + (topLeft + 8)).attr("data-player") == p
-                    && $("#" + (topLeft + 16)).attr("data-player") == p
-                    && $("#" + (topLeft + 24)).attr("data-player") == p) {
-                    return true
-                }
-
-                if ($("#" + topRight).attr("data-player") == p
-                    && $("#" + (topRight + 6)).attr("data-player") == p
-                    && $("#" + (topRight + 12)).attr("data-player") == p
-                    && $("#" + (topRight + 18)).attr("data-player") == p) {
-                    return true
-                }
-                topLeft++ //move across the columns
-                topRight = topLeft + 3
-            }
-            topLeft = i * 7 + 7 //move down the rows
+            topLeft++ //move across the columns
             topRight = topLeft + 3
         }
-        return false
+        topLeft = i * 7 + 7 //move down the rows
+        topRight = topLeft + 3
     }
+    return false
+}
