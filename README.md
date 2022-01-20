@@ -1,4 +1,4 @@
-Connect Four
+**Connect Four**
 
 Technologies used:
 1. for loops and while loops
